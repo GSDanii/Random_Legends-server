@@ -1,0 +1,23 @@
+<div class="row row-cols-1 row-cols-md-2 g-4 d-flex justify-content-center mt-4">
+    <div class="col">
+        <div class="card text-center">
+            <img src="{{post.imgChamp}}" class="card-img-top" alt="champImage">
+            <div class="card-body d-flex justify-content-around">
+                {{#each post.imgItems}}
+                <img src="{{this}}" alt="image">
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    <div class="card text-bg-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header">Posted by: {{post.user.username}}
+            <p class="card-text">{{post.user.role}}</p>
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{post.description}}</p>
+        </div>
+    </div>
+    {{#if canView}}
+    <a class="btn btn-danger" href="{{post._id}}/delete">DELETE POST</a>
+    {{/if}}
+</div>

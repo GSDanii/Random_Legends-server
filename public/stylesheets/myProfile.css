@@ -1,0 +1,28 @@
+.profileVideo {
+    position: absolute;
+    min-width: 100%;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+.profileDecoration {
+    display: flex;
+    justify-content: center;
+    height: 70px;
+    margin: auto;
+    padding: 0;
+}
+
+.profileCard {
+    background-color: rgba(145, 74, 74, 0);
+}
+
+#profileUpdateImg {
+    background-image: url("https: //res.cloudinary.com/dalk1vcw9/image/upload/v1663318889/RoundedLogo_hhetzk.png");
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    margin: auto;
+}

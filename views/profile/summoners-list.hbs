@@ -1,0 +1,26 @@
+<div class="d-flex flex-row justify-content-around mt-4">
+    {{#each allSummoners}}
+    <div class="card" style="width: 18rem;">
+        <div class="d-flex justify-content-center">
+            <img class="img-fluid w-25" src="/images/LogoDorado.png" alt="Summoner">
+        </div>
+        <div class="card-body">
+            <p class="card-title font-weight-bold text-center"><span class="text-warning">Username:</span> {{username}}
+            </p>
+            <p class="card-text font-weight-bold text-center mb-3"> Summoner Name: {{summonerName}}</p>
+            <p class="card-text font-weight-bold text-center"> Role: <span
+                    class="text-danger font-italic">{{role}}</span> </p>
+        </div>
+        <div class="d-flex justify-content-center">
+            <a class="btnProfile p-3 mx-2" href="/profile/{{_id}}/adminUpdate" class="card-link">Update</a>
+            <a class="btnProfile p-3 mx-2" href="/profile/{{_id}}/delete" class="card-link">Delete</a>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+<div class="d-flex justify-content-center">
+    <video autoplay muted loop plays-inline>
+        <source src="https://res.cloudinary.com/dalk1vcw9/video/upload/v1663272676/Poro_base_AN_idle3_o5p599.mp4">
+    </video>
+</div>

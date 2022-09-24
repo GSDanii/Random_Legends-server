@@ -1,0 +1,51 @@
+{{!-- <form action="/auth/signUp" method="post">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Username:</label>
+        <input type="text" name="username" class="form-control w-25" id="exampleInputEmail1">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password:</label>
+        <input type="password" name="password" class="form-control w-25" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Summoner Name: (optional)</label>
+        <input type="text" name="summonerName" class="form-control w-25" id="exampleInputEmail1">
+    </div>
+    <button type="submit" class="btn btn-primary">Create Account!</button>
+</form> --}}
+
+
+<div class="container">
+    <div class="login-container">
+        <div class="login-top">
+            <a href="/"><img src="/images/LogoNegro.png" width="40" alt="RlLogo"></a>
+            <div class="language">
+                <p>EUW</p>
+                <i id="globe"><img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Globe_icon_2.svg/800px-Globe_icon_2.svg.png"
+                        width="20"></i>
+            </div>
+        </div>
+        <div class="login-body">
+            <p>SIGNUP</p>
+
+            <form action="/auth/signUp" method="post" onkeyup="check()" id="login" autocomplete="off">
+                <input type="text" name="username" placeholder="Username" required="required">
+
+                <input type="password" name="password" placeholder="Password" required="required">
+
+                <input type="text" name="summonerName" placeholder="Summoner Name: (optional)">
+
+                <div class="button">
+                    <button type="submit">&#x279C;</button>
+                </div>
+                {{#if messageError}}
+                <p>{{messageError}}</p>
+                {{/if }}
+            </form>
+        </div>
+    </div>
+    <div class="background-container2">
+        <div class="background-alert"></div>
+    </div>
+</div>

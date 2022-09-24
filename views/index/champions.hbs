@@ -1,0 +1,17 @@
+<div class="row">
+    {{#each nameAndImg}}
+    <div class="col-12 col-sm-6 col-lg-3">
+        <a class=" text-decoration-none" href="/champion-details/{{name}}">
+            <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s"
+                style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <div>
+                    <img class="img-fluid" src="{{img}}" alt="img">
+                </div>
+                <div class="single_advisor_details_info d-flex justify-content-center">
+                    <p class="font-weight-bold active" id="championListNames">{{name}}</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    {{/each}}
+</div>

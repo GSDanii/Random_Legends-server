@@ -1,0 +1,24 @@
+const IRON = 'IRON';
+const BRONZE = 'BRONZE';
+const SILVER = 'SILVER';
+const GOLD = 'GOLD';
+const PLATINUM = 'PLATINUM';
+const DIAMOND = 'DIAMOND';
+const MASTER = 'MASTER';
+const GRANDMASTER = 'GRANDMASTER';
+const CHALLENGER = 'CHALLENGER';
+const ROLES = [IRON, BRONZE, SILVER, GOLD, PLATINUM, DIAMOND, MASTER, GRANDMASTER, CHALLENGER];
+
+module.exports = {
+    IRON,
+    BRONZE,
+    SILVER,
+    GOLD,
+    PLATINUM,
+    DIAMOND,
+    MASTER,
+    GRANDMASTER,
+    CHALLENGER,
+    ROLES
+};
+
