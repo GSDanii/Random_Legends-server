@@ -3,7 +3,7 @@ const { IRON, BRONZE, SILVER, GOLD, PLATINUM, DIAMOND, MASTER, GRANDMASTER, CHAL
 const DDragonService = require("../services/ddragon.service");
 const apiRiotService = require("../services/api-riot.service")
 const getChampionId = require("../utils/getChampionId")
-
+const ChampionsModel = require('../models/Champions.model')
 
 const champNameAndImg = (req, res, next) => {
     DDragonService
@@ -61,17 +61,19 @@ const weeklyRotation = (req, res, next) => {
 
 const championDetails = (req, res, next) => {
     const { championName } = req.params
-
-    DDragonService
-        .getDetailsChampions(championName)
+    ChampionsModel.findOne({ name: `${championName}` })
+        // DDragonService
+        //     .getDetailsChampions(championName)
         .then((championDetails) => {
+            console.log(championDetails)
+
             const image = `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${championName}_0.jpg`
-            let oneChampion = championDetails[championName]
-            const { name, title, lore, allytips, enemytips, passive, stats } = oneChampion
+            // let oneChampion = championDetails[championName]
+            const { key, name, title, lore, allytips, enemytips, passive, stats, skins, tags } = championDetails
 
-            const stringStats = JSON.stringify(stats)
+            // const stringStats = JSON.stringify(stats)
 
-            let championData = { image, name, title, lore, allytips, enemytips, passive, stringStats }
+            let championData = { image, key, name, title, lore, allytips, enemytips, passive, stats, skins, tags }
             res.status(200).json(championData)
             // res.render("index/champion-details", championData)
         })
