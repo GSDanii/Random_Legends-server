@@ -1,43 +1,13 @@
 const router = require("express").Router();
-const { CHALLENGER } = require("../const/user.const")
-const { checkRoleUser, checkUser } = require('../utils/checkUsers')
-const PostModel = require('../models/Post.model')
+const { allPosts, viewPost, createPost, deletePost } = require('../controller/forum.controller');
 
-router.get('/', (req, res, next) => {
-    PostModel
-        .find()
-        .then(AllPosts => res.render('index/forum', { AllPosts }))
-        .catch((err) => next(err))
-})
 
-router.get('/:idPost/delete', (req, res, next) => {
-    PostModel.findByIdAndDelete(req.params.idPost)
-        .then(() => res.redirect('/forum'))
-        .catch((err) => next(err))
-})
+router.get('/', allPosts)
 
-router.get('/:idPost', (req, res, next) => {
-    let canView = false
-    PostModel
-        .findById(req.params.idPost)
-        .populate('user', 'username role -_id')
-        .then((post) => {
-            const { user } = req.session;
-            if (checkUser(user.username, post.user.username) || checkRoleUser(user.role, CHALLENGER)) {
-                canView = true
-            }
-            res.render('index/post-details', { post, canView })
-        })
-        .catch((err) => next(err))
-})
+router.get('/:idPost', viewPost)
 
-router.post("/post", (req, res, next) => {
+router.post('/post', createPost)
 
-    const { description, imgChamp, imgItems, title } = req.body
-    const user = req.session.user._id
-    PostModel.create({ user, description, imgChamp, imgItems, title })
-        .then(() => res.redirect('/forum'))
-        .catch((err) => next(err))
-})
+router.delete('/:idPost/delete', deletePost)
 
 module.exports = router

@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon -e css,hbs,js"
+    "dev": "nodemon -e css,hbs,js",
+    "seed": "node seeds/champion.js"
   },
   "dependencies": {
     "axios": "^0.27.2",

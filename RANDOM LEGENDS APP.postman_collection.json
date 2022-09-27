@@ -1,0 +1,798 @@
+{
+	"info": {
+		"_postman_id": "a23571ac-261f-49e9-9bc7-33256120b809",
+		"name": "RANDOM LEGENDS APP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23213107"
+	},
+	"item": [
+		{
+			"name": "Llamadas Api Riot",
+			"item": [
+				{
+					"name": "Item Image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://ddragon.leagueoflegends.com/cdn/12.17.1/img/item/1004.png",
+							"protocol": "http",
+							"host": [
+								"ddragon",
+								"leagueoflegends",
+								"com"
+							],
+							"path": [
+								"cdn",
+								"12.17.1",
+								"img",
+								"item",
+								"1004.png"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Todos los item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json()\r",
+									"const items = response.data\r",
+									"const key = Object.keys(items)\r",
+									"const itemFilter = key.filter((key)=> key > 3000)\r",
+									"\r",
+									"\r",
+									"let randomKeys =[]\r",
+									"for (let i = 0; i < 6; i++){\r",
+									"const randomNum = (Math.floor(Math.random() * itemFilter.length))\r",
+									"const index = itemFilter[randomNum]\r",
+									"randomKeys.push(index)\r",
+									"}\r",
+									"console.log(randomKeys)\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ddragon.leagueoflegends.com/cdn/12.17.1/data/es_ES/item.json",
+							"protocol": "https",
+							"host": [
+								"ddragon",
+								"leagueoflegends",
+								"com"
+							],
+							"path": [
+								"cdn",
+								"12.17.1",
+								"data",
+								"es_ES",
+								"item.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Champion Full Splash Art",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg",
+							"protocol": "http",
+							"host": [
+								"ddragon",
+								"leagueoflegends",
+								"com"
+							],
+							"path": [
+								"cdn",
+								"img",
+								"champion",
+								"splash",
+								"Aatrox_0.jpg"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Todos los champs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// const response = pm.response.json()\r",
+									"// const items = response.data\r",
+									"// const key = Object.keys(items)\r",
+									"\r",
+									"\r",
+									"\r",
+									"// let randomChamp =[]\r",
+									"// for (let i = 0; i < 1; i++){\r",
+									"// const randomNum = (Math.floor(Math.random() * key.length))\r",
+									"// const index = key[randomNum]\r",
+									"// randomChamp.push(index)\r",
+									"// }\r",
+									"// console.log(randomChamp)\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://ddragon.leagueoflegends.com/cdn/12.17.1/data/es_ES/champion.json",
+							"protocol": "http",
+							"host": [
+								"ddragon",
+								"leagueoflegends",
+								"com"
+							],
+							"path": [
+								"cdn",
+								"12.17.1",
+								"data",
+								"es_ES",
+								"champion.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Champion Rotation",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "RGAPI-0903bf72-a153-43f7-bf36-da59864b74e3",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "X-Riot-Token",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://euw1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key=RGAPI-0903bf72-a153-43f7-bf36-da59864b74e3",
+							"protocol": "https",
+							"host": [
+								"euw1",
+								"api",
+								"riotgames",
+								"com"
+							],
+							"path": [
+								"lol",
+								"platform",
+								"v3",
+								"champion-rotations"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "RGAPI-0903bf72-a153-43f7-bf36-da59864b74e3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busqueda por summonerName",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "RGAPI-0903bf72-a153-43f7-bf36-da59864b74e3",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "X-Riot-Token",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/Ron%20Pelano",
+							"protocol": "https",
+							"host": [
+								"euw1",
+								"api",
+								"riotgames",
+								"com"
+							],
+							"path": [
+								"lol",
+								"summoner",
+								"v4",
+								"summoners",
+								"by-name",
+								"Ron%20Pelano"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Llamadas Back",
+			"item": [
+				{
+					"name": "Auth Routes",
+					"item": [
+						{
+							"name": "Sign-up",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "prueba2",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "1234",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "CHALLENGER",
+											"type": "text"
+										},
+										{
+											"key": "summonerName",
+											"value": "prueba2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/signUp",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"signUp"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Loging",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "Linebacker66",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "1234",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Forum Routes",
+					"item": [
+						{
+							"name": "Create Post",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "title",
+											"value": "Prueba postman",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "esto es una prueba de postman",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/forum/post",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"forum",
+										"post"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Forum",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/forum",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"forum"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "One Post",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/forum/:idPost",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"forum",
+										":idPost"
+									],
+									"variable": [
+										{
+											"key": "idPost",
+											"value": "63243bdc156afd15c4b9ed7d"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Post (no funciona)",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/forum/:idPost/delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"forum",
+										":idPost",
+										"delete"
+									],
+									"variable": [
+										{
+											"key": "idPost",
+											"value": "632f3819c3301e7c5ab3841f"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Index Routes",
+					"item": [
+						{
+							"name": "Champions List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/championsList",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"championsList"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Random Pick",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/randomPick",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"randomPick"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Weekly Rotation",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "RGAPI-71a4004d-0ff2-45e6-adc6-0a81b262425c",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "X-Riot-Token",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/weeklyRotation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"weeklyRotation"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Weekly Rotation",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/weeklyRotation",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"weeklyRotation"
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						},
+						{
+							"name": "Champion Details",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/champion-details/:championName",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"champion-details",
+										":championName"
+									],
+									"variable": [
+										{
+											"key": "championName",
+											"value": "Aatrox"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Champion Details",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/champion-details/:championName",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"champion-details",
+												":championName"
+											],
+											"variable": [
+												{
+													"key": "championName",
+													"value": "Aatrox"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Profile Routes",
+					"item": [
+						{
+							"name": "All Users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/profile/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"profile",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User Profile logged",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/profile/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"profile",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "63242a73c67bb4653f20dff4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User para ver sus datos al actualizar",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/profile/:id/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"profile",
+										":id",
+										"update"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "63242a73c67bb4653f20dff4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete User",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/profile/:id/delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"profile",
+										":id",
+										"delete"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "632f2a39ff4cde83b2b21ccf"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Profile",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "pepe otra vez",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/profile/:id/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"profile",
+										":id",
+										"update"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "632f297997a432712719e272"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Profile for Admin",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "Pepe actualizado por admin",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/profile/:id/adminUpdate",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"profile",
+										":id",
+										"adminUpdate"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "632f297997a432712719e272"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
