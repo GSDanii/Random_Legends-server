@@ -21,7 +21,7 @@ mongoose
         return DDRAGONSERVICE.getDetailsChampions(`${championName}`)
     })))
 
-        })
+
 
     .then((champions) => {
 
