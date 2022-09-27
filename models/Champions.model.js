@@ -5,9 +5,7 @@ const championsSchema = new Schema(
         key: { type: String },
         name: { type: String },
         title: { type: String },
-        skins: [{
-            num: { type: Number }
-        }],
+        skins: [{ type: Number }],
         lore: { type: String },
         allytips: [{ type: String }],
         enemytips: [{ type: String }],
