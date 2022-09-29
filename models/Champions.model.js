@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const championsSchema = new Schema(
     {
+        id: { type: String },
         key: { type: String },
         name: { type: String },
         title: { type: String },

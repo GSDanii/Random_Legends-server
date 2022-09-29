@@ -11,11 +11,11 @@ const { champNameAndImg,
 
 router.get("/championsList", champNameAndImg)
 
-router.get("/randomPick", roleValidation(ROLES), randomChampAndItems)
+router.get("/randomPick", randomChampAndItems)
 
-router.get("/weeklyRotation", roleValidation(ROLES), weeklyRotation);
+router.get("/weeklyRotation", weeklyRotation);
 
-router.get("/champion-details/:championName", roleValidation(ROLES), championDetails)
+router.get("/champion-details/:championName", championDetails)
 
 
 module.exports = router;

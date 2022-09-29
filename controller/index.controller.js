@@ -61,7 +61,7 @@ const weeklyRotation = (req, res, next) => {
 
 const championDetails = (req, res, next) => {
     const { championName } = req.params
-    ChampionsModel.findOne({ name: `${championName}` })
+    ChampionsModel.findOne({ id: `${championName}` })
         // DDragonService
         //     .getDetailsChampions(championName)
         .then((championDetails) => {
@@ -69,11 +69,11 @@ const championDetails = (req, res, next) => {
 
             const image = `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${championName}_0.jpg`
             // let oneChampion = championDetails[championName]
-            const { key, name, title, lore, allytips, enemytips, passive, stats, skins, tags } = championDetails
+            const { id, key, name, title, lore, allytips, enemytips, passive, stats, skins, tags } = championDetails
 
             // const stringStats = JSON.stringify(stats)
 
-            let championData = { image, key, name, title, lore, allytips, enemytips, passive, stats, skins, tags }
+            let championData = { id, image, key, name, title, lore, allytips, enemytips, passive, stats, skins, tags }
             res.status(200).json(championData)
             // res.render("index/champion-details", championData)
         })

@@ -8,8 +8,19 @@ const favicon = require("serve-favicon");
 
 const path = require("path");
 
+const cors = require("cors");
+
+
+
 module.exports = (app) => {
   app.use(logger("dev"));
+
+  app.use(
+    cors({
+      credentials: true,
+      origin: process.env.ORIGIN || "http://localhost:3000",
+    })
+  );
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
