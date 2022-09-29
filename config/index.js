@@ -14,7 +14,7 @@ const cors = require("cors");
 
 module.exports = (app) => {
   app.use(logger("dev"));
-
+  app.set("trust proxy", 1);
   app.use(
     cors({
       credentials: true,
