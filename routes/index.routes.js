@@ -10,9 +10,9 @@ const validateToken = require('../middlewares/validateToke.middleware');
 
 
 
-router.get("/championsList", validateToken, champNameAndImg)
+router.get("/championsList", champNameAndImg)
 
-router.get("/randomPick", validateToken, randomChampAndItems)
+router.get("/randomPick", randomChampAndItems)
 
 router.get("/weeklyRotation", weeklyRotation);
 
