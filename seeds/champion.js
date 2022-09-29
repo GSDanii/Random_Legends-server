@@ -32,9 +32,9 @@ mongoose
         })
 
         const newArr = allChampionsDb.map(champ => {
-            const { key, name, title, skins, lore, allytips, enemytips, tags, stats } = champ
+            const { id, key, name, title, skins, lore, allytips, enemytips, tags, stats } = champ
             let numSkins = skins.map(skin => skin.num)
-            return { key, name, title, skins: numSkins, lore, allytips, enemytips, tags, stats }
+            return { id, key, name, title, skins: numSkins, lore, allytips, enemytips, tags, stats }
 
         })
 

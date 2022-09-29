@@ -9,6 +9,7 @@ const champNameAndImg = (req, res, next) => {
     DDragonService
         .getAllChampions()
         .then(champions => {
+            console.log('te necesito a tii', champions)
             const championImages = champions.map((champImage) => `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champImage}_0.jpg`)
             let nameAndImg = champions.map((name, i) => {
                 return { name, 'img': championImages[i] }

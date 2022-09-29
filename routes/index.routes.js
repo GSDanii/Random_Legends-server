@@ -6,16 +6,17 @@ const { champNameAndImg,
   weeklyRotation,
   championDetails
 } = require('../controller/index.controller');
+const validateToken = require('../middlewares/validateToke.middleware');
 
 
 
-router.get("/championsList", champNameAndImg)
+router.get("/championsList", validateToken, champNameAndImg)
 
-router.get("/randomPick", roleValidation(ROLES), randomChampAndItems)
+router.get("/randomPick", validateToken, randomChampAndItems)
 
-router.get("/weeklyRotation", roleValidation(ROLES), weeklyRotation);
+router.get("/weeklyRotation", weeklyRotation);
 
-router.get("/champion-details/:championName", roleValidation(ROLES), championDetails)
+router.get("/champion-details/:championName", championDetails)
 
 
 module.exports = router;

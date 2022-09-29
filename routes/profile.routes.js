@@ -12,9 +12,9 @@ const { getAllUsers,
 } = require('../controller/profile.controller');
 
 
-router.get('/users', roleValidation([CHALLENGER]), getAllUsers)
+router.get('/users', getAllUsers)
 
-router.get('/:id', userValidation(ROLES), userProfile)
+router.get('/:id', userProfile)
 
 router.get("/:id/update", userProfileUpdate)
 

@@ -1,34 +1,42 @@
 const UserModel = require('../models/User.model')
+const { signJwt } = require('../utils/jwt.utils');
+const bcrypt = require('bcryptjs')
 
 
 const createUser = (req, res, next) => {
     const { username, password, summonerName } = req.body;
+    UserModel.findOne({ username })
+        .then((user) => {
+            if (user) {
+                console.log('ME GUSTARÍA SABER SI ENTRO AQUÍ')
+                throw new Error('Name or password incorrect, please try again.');
+            }
 
-    UserModel.create({ username, password, summonerName })
+            return UserModel.create({ username, password, summonerName })
+
+        })
         .then(() => res.sendStatus(201))
         .catch((err) => {
-            res.status(400).json({ messageError: 'Ha ocurrido un error' });
+            if (err.message === 'Name or password incorrect, please try again.') {
+                res.status(400).json({ errorMessage: err.message });
+                return;
+            }
+            next(err);
         });
-};
+}
 
 const login = (req, res, next) => {
     const { username, password } = req.body;
     UserModel
         .findOne({ username })
         .then((user) => {
-            if (user) {
-                if (user.comparePassword(password)) {
-                    req.session.user = user;
-                    res.sendStatus(200);
-                }
-                else {
-                    res.status(400).json({ messageError: 'Username or password invalid' })
-                }
+            if (user && bcrypt.compareSync(password, user.password)) {
+                res.status(200).json({ token: signJwt(user._id.toString(), user.username) });
             } else {
-                res.status(400).json({ messageError: 'Username or password invalid' })
+                res.status(400).json({ errorMessage: 'Email o contraseña no valida.' });
             }
         })
-        .catch(e => next(e))
+        .catch(next);
 };
 
 module.exports = {
