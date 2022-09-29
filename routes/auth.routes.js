@@ -1,6 +1,8 @@
 const router = require("express").Router();
-const { createUser, login } = require('../controller/auth.controller');
+const { createUser, login, getUser } = require('../controller/auth.controller');
+const validateToken = require('../middlewares/validateToke.middleware');
 
+router.get('/me', validateToken, getUser)
 
 router.post('/signUp', createUser)
 
