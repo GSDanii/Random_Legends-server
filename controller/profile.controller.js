@@ -16,7 +16,7 @@ const userProfile = (req, res, next) => {
     let info
     const { id: userID } = req.params
     apiRiotService
-        .getSummonerInfo(req.session.user.summonerName)
+        .getSummonerInfo('Ron Pelano')
         .then(userInfo => {
             const { summonerLevel, id: summonerID } = userInfo
             lvl = summonerLevel
