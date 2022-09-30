@@ -26,8 +26,8 @@ const viewPost = (req, res, next) => {
 }
 
 const createPost = (req, res, next) => {
-    const { description, imgChamp, imgItems, title } = req.body
-    const user = req.session.user._id
+    const { description, imgChamp, imgItems, title, user } = req.body
+    // const user = req.session.user._id
     PostModel.create({ user, description, imgChamp, imgItems, title })
         .then(() => res.sendStatus(201))
         .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
