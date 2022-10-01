@@ -31,7 +31,7 @@ const login = (req, res, next) => {
         .findOne({ username })
         .then((user) => {
             if (user && bcrypt.compareSync(password, user.password)) {
-                res.status(200).json({ token: signJwt(user._id.toString(), user.username) });
+                res.status(200).json({ token: signJwt(user._id.toString(), user.username, user.summonerName, user.role) });
             } else {
                 res.status(400).json({ errorMessage: 'Email o contraseña no valida.' });
             }
@@ -42,6 +42,7 @@ const login = (req, res, next) => {
 
 const getUser = (req, res, next) => {
     if (req.user) {
+        console.log(req.user)
         UserModel.findById(req.user._id).then((user) => {
             if (user) {
                 res.status(200).json(user)

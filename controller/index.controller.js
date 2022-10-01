@@ -22,6 +22,7 @@ const champNameAndImg = (req, res, next) => {
 
 const randomChampAndItems = (req, res, next) => {
     let items = {}
+    console.log('random items', req.user)
     DDragonService
         .getItemKeys()
         .then(randomKeys => {

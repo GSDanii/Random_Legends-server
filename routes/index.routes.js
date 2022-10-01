@@ -12,7 +12,7 @@ const validateToken = require('../middlewares/validateToke.middleware');
 
 router.get("/championsList", champNameAndImg)
 
-router.get("/randomPick", randomChampAndItems)
+router.get("/randomPick", validateToken, randomChampAndItems)
 
 router.get("/weeklyRotation", weeklyRotation);
 
