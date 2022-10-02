@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { roleValidation, userValidation } = require('../middlewares/roles.middlewares');
 const { IRON, BRONZE, SILVER, GOLD, PLATINUM, DIAMOND, MASTER, GRANDMASTER, CHALLENGER, ROLES } = require("../const/user.const")
 const apiRiotService = require("../services/api-riot.service")
+const validateToken = require('../middlewares/validateToke.middleware')
 const { getAllUsers,
     userProfile,
     userProfileUpdate,
@@ -14,7 +15,7 @@ const { getAllUsers,
 
 router.get('/users', getAllUsers)
 
-router.get('/:id', userProfile)
+router.get('/:id', validateToken, userProfile)
 
 router.get("/:id/update", userProfileUpdate)
 
