@@ -13,7 +13,7 @@ const { getAllUsers,
 } = require('../controller/profile.controller');
 
 
-router.get('/users', getAllUsers)
+router.get('/users', validateToken, getAllUsers)
 
 router.get('/:id', validateToken, userProfile)
 
