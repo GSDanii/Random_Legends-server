@@ -19,7 +19,6 @@ const viewPost = (req, res, next) => {
             if (checkUser(user.username, post.user.username) || checkRoleUser(user.role, CHALLENGER)) {
                 canView = true
             }
-            res.status(200).json({ post, canView })
 
         })
         .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))

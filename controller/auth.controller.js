@@ -32,8 +32,9 @@ const login = (req, res, next) => {
         .then((user) => {
             if (user && bcrypt.compareSync(password, user.password)) {
                 res.status(200).json({ token: signJwt(user._id.toString(), user.username) });
-            } else {
-                res.status(400).json({ errorMessage: 'Email o contraseña no valida.' });
+            }
+            else {
+                res.status(200).json({ errorMessage: 'Email o contraseña MODIFICADA.' });
             }
         })
         .catch(next);
