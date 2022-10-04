@@ -20,9 +20,6 @@ mongoose
 
         return DDRAGONSERVICE.getDetailsChampions(`${championName}`)
     })))
-
-
-
     .then((champions) => {
 
         const allChampionsDb = []

@@ -16,12 +16,12 @@ const viewPost = (req, res, next) => {
     PostModel
         .findById(req.params.idPost)
         .populate('user', 'username role -_id')
-        .populate({ path: 'comment', populate: { path: 'user', } })
+        .populate({ path: 'comment', populate: { path: 'user' } })
         .then((post) => {
             if (checkUser(username, post.user.username) || checkRoleUser(role, CHALLENGER)) {
                 canView = true
             }
-
+            res.status(200).json({ post, canView })
         })
         .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
 }

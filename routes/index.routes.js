@@ -4,7 +4,8 @@ const { IRON, BRONZE, SILVER, GOLD, PLATINUM, DIAMOND, MASTER, GRANDMASTER, CHAL
 const { champNameAndImg,
   randomChampAndItems,
   weeklyRotation,
-  championDetails
+  championDetails,
+  allChamps
 } = require('../controller/index.controller');
 const validateToken = require('../middlewares/validateToke.middleware');
 
@@ -17,6 +18,8 @@ router.get("/randomPick", validateToken, randomChampAndItems)
 router.get("/weeklyRotation", weeklyRotation);
 
 router.get("/champion-details/:championName", championDetails)
+
+router.get("/checkBox", validateToken, allChamps)
 
 
 module.exports = router;

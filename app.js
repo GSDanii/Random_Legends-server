@@ -8,16 +8,6 @@ const app = express();
 
 require("./config")(app);
 
-
-
-
-
-const projectName = "Random Legends";
-
-app.locals.appTitle = `${projectName}`;
-
-
-
 require("./routes")(app)
 
 require("./error-handling")(app);

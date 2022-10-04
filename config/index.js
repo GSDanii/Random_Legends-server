@@ -10,7 +10,7 @@ const path = require("path");
 
 const cors = require("cors");
 
-
+// TODO LIMPIAR :OJO:
 
 module.exports = (app) => {
   app.use(logger("dev"));
