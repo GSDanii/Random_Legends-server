@@ -31,7 +31,7 @@ const login = (req, res, next) => {
         .findOne({ username })
         .then((user) => {
             if (user && bcrypt.compareSync(password, user.password)) {
-                res.status(200).json({ token: signJwt(user._id.toString(), user.username) });
+                res.status(200).json({ token: signJwt(user._id.toString(), user.username, user.summonerName, user.role) });
             }
             else {
                 res.status(200).json({ errorMessage: 'Email o contraseña MODIFICADA.' });

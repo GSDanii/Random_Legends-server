@@ -5,7 +5,6 @@ const validateToken = (req, res, next) => {
     const { authorization } = req.headers;
     if (authorization) {
         const token = deleteBearer(authorization);
-        console.log("QUE COJONES ES ESTO???", verifyJwt(token))
         const { sub, username, role, summonerName } = verifyJwt(token)
         req.user = { _id: sub, username, role, summonerName };
     } else {
