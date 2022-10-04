@@ -6,13 +6,15 @@ const getChampionId = require("../utils/getChampionId")
 const ChampionsModel = require('../models/Champions.model')
 
 const champNameAndImg = (req, res, next) => {
-    DDragonService
-        .getAllChampions()
+    // req.query 
+    const query = {}
+    ChampionsModel
+        .find()
         .then(champions => {
             console.log('te necesito a tii', champions)
-            const championImages = champions.map((champImage) => `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champImage}_0.jpg`)
-            let nameAndImg = champions.map((name, i) => {
-                return { name, 'img': championImages[i] }
+            const championImages = champions.map((champ) => `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_0.jpg`)
+            let nameAndImg = champions.map((champ, i) => {
+                return { name: champ.id, 'img': championImages[i], tags: champ.tags }
             })
             res.status(200).json(nameAndImg)
             // res.render("index/champions", { nameAndImg });
@@ -83,9 +85,16 @@ const championDetails = (req, res, next) => {
     // .catch((err) => next(err));
 }
 
+const allChamps = (req, res, next) => {
+    ChampionsModel.find()
+        .then(allChamps => res.status(200).json(allChamps))
+        .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
+}
+
 module.exports = {
     champNameAndImg,
     randomChampAndItems,
     weeklyRotation,
-    championDetails
+    championDetails,
+    allChamps
 };

@@ -10,6 +10,7 @@ router.post('/post', validateToken, createPost)
 
 router.post('/comment', validateToken, createComment)
 
+// TODO remove delete (path) no el metodo 
 router.delete('/:idPost/delete', validateToken, deletePost)
 
 module.exports = router

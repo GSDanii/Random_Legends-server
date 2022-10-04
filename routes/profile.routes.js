@@ -6,7 +6,6 @@ const validateToken = require('../middlewares/validateToke.middleware')
 const { getAllUsers,
     userProfile,
     userProfileUpdate,
-    adminUpdate,
     userUpdate,
     deleteUser,
     userProfileUpdateAdmin
@@ -17,15 +16,18 @@ router.get('/users', validateToken, getAllUsers)
 
 router.get('/:id', validateToken, userProfile)
 
-router.get("/:id/update", userProfileUpdate)
+router.get("/:id/update", validateToken, userProfileUpdate)
 
-router.get("/:id/adminUpdate", userProfileUpdateAdmin)
+router.get("/:id/adminUpdate", validateToken, userProfileUpdateAdmin)
+
+
+// TODO: unificar ambas rutas en una sola.
+//--
+router.put("/:id/update", validateToken, userUpdate)
+
+//--
 
 router.delete("/:id/delete", deleteUser)
-
-router.put("/:id/update", userUpdate)
-
-router.put("/:id/adminUpdate", adminUpdate)
 
 module.exports = router
 

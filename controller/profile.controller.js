@@ -34,6 +34,8 @@ const userProfile = (req, res, next) => {
         .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
 }
 
+// TODO unificar controllers
+//--
 const userProfileUpdate = (req, res, next) => {
     UserModel.findById(req.params.id)
         .then((user) => {
@@ -41,40 +43,46 @@ const userProfileUpdate = (req, res, next) => {
         })
         .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
 }
-
 const userProfileUpdateAdmin = (req, res, next) => {
     UserModel.findById(req.params.id)
         .then((user) => res.json(user))
         .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
 }
+//--
 
 const deleteUser = (req, res, next) => {
     UserModel.findByIdAndDelete(req.params.id)
         .then(() => {
             res.sendStatus(204)
-            // res.redirect('/auth/signup')
         })
         .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
 }
+
+// const userUpdate = (req, res, next) => {
+//     const { username, summonerName } = req.body
+
+//     UserModel.findByIdAndUpdate(req.params.id, { username, summonerName })
+//         .then((user) => {
+//             res.sendStatus(200)
+//         })
+//         .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
+// }
 
 const userUpdate = (req, res, next) => {
-    const { username, summonerName } = req.body
 
-    UserModel.findByIdAndUpdate(req.params.id, { username, summonerName })
-        .then((user) => {
-            res.sendStatus(200)
-            // res.redirect(`/profile/${user._id}`)
-        })
-        .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
-}
-
-const adminUpdate = (req, res, next) => {
     const { username, summonerName, role } = req.body
 
-    UserModel.findByIdAndUpdate(req.params.id, { username, summonerName, role })
+    const update = {
+        username, summonerName
+    }
+
+    if (req.user.role === 'CHALLENGER') {
+        update.role = role;
+    }
+
+    UserModel.findByIdAndUpdate(req.params.id, update)
         .then(() => {
             res.sendStatus(200)
-            // res.redirect(`/profile/summoners`)
         })
         .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
 }
@@ -83,7 +91,6 @@ module.exports = {
     getAllUsers,
     userProfile,
     userProfileUpdate,
-    adminUpdate,
     userUpdate,
     deleteUser,
     userProfileUpdateAdmin
