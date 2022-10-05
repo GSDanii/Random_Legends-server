@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { roleValidation, userValidation } = require('../middlewares/roles.middlewares');
 const { IRON, BRONZE, SILVER, GOLD, PLATINUM, DIAMOND, MASTER, GRANDMASTER, CHALLENGER, ROLES } = require("../const/user.const")
 const { champNameAndImg,
+  searchChamps,
   randomChampAndItems,
   weeklyRotation,
   championDetails,
@@ -12,6 +13,8 @@ const validateToken = require('../middlewares/validateToke.middleware');
 
 
 router.get("/championsList", champNameAndImg)
+
+router.get('/searchChamp', searchChamps)
 
 router.get("/randomPick", validateToken, randomChampAndItems)
 

@@ -6,21 +6,61 @@ const getChampionId = require("../utils/getChampionId")
 const ChampionsModel = require('../models/Champions.model')
 
 const champNameAndImg = (req, res, next) => {
-    // req.query 
-    const query = {}
-    ChampionsModel
-        .find()
-        .then(champions => {
-            console.log('te necesito a tii', champions)
-            const championImages = champions.map((champ) => `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_0.jpg`)
-            let nameAndImg = champions.map((champ, i) => {
-                return { name: champ.id, 'img': championImages[i], tags: champ.tags }
+    let tags = []
+
+    for (const key in req.query) {
+        if (req.query[key] === 'true') {
+            tags.push(key)
+        }
+    }
+    tags.length === 0
+        ?
+
+        ChampionsModel
+            .find()
+            .then(champions => {
+                console.log('estas en 0', champions)
+                const championImages = champions.map((champ) => `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_0.jpg`)
+                let nameAndImg = champions.map((champ, i) => {
+                    return { name: champ.id, 'img': championImages[i], tags: champ.tags }
+                })
+                res.status(200).json(nameAndImg)
+                // res.render("index/champions", { nameAndImg });
             })
-            res.status(200).json(nameAndImg)
-            // res.render("index/champions", { nameAndImg });
-        })
-        .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
+            .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
+        :
+        ChampionsModel
+            .find({ 'tags': { "$all": tags } })
+            .then(champions => {
+                console.log('estas en 1', champions)
+                const championImages = champions.map((champ) => `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_0.jpg`)
+                let nameAndImg = champions.map((champ, i) => {
+                    return { name: champ.id, 'img': championImages[i], tags: champ.tags }
+                })
+                res.status(200).json(nameAndImg)
+                // res.render("index/champions", { nameAndImg });
+            })
+            .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
 };
+
+const searchChamps = (req, res, next) => {
+    console.log(req.query)
+    let tags = []
+
+    for (const key in req.query) {
+        if (req.query[key] === 'true') {
+            tags.push(key)
+        }
+    }
+    console.log(tags)
+
+    ChampionsModel
+        .find({ 'tags': { "$all": [] } })
+        .then(foundChamps => res.status(200).json(foundChamps))
+        .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
+
+
+}
 
 const randomChampAndItems = (req, res, next) => {
     let items = {}
@@ -93,6 +133,7 @@ const allChamps = (req, res, next) => {
 
 module.exports = {
     champNameAndImg,
+    searchChamps,
     randomChampAndItems,
     weeklyRotation,
     championDetails,
