@@ -8,7 +8,8 @@ const { getAllUsers,
     userProfileUpdate,
     userUpdate,
     deleteUser,
-    userProfileUpdateAdmin
+    userProfileUpdateAdmin,
+    addFavChamp
 } = require('../controller/profile.controller');
 
 
@@ -24,6 +25,8 @@ router.get("/:id/adminUpdate", validateToken, userProfileUpdateAdmin)
 // TODO: unificar ambas rutas en una sola.
 //--
 router.put("/:id/update", validateToken, userUpdate)
+
+router.put("/addChampFav", validateToken, addFavChamp)
 
 //--
 

@@ -19,10 +19,9 @@ const champNameAndImg = (req, res, next) => {
         ChampionsModel
             .find()
             .then(champions => {
-                console.log('estas en 0', champions)
                 const championImages = champions.map((champ) => `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_0.jpg`)
                 let nameAndImg = champions.map((champ, i) => {
-                    return { name: champ.id, 'img': championImages[i], tags: champ.tags }
+                    return { name: champ.id, 'img': championImages[i], tags: champ.tags, id: champ._id }
                 })
                 res.status(200).json(nameAndImg)
                 // res.render("index/champions", { nameAndImg });
@@ -32,10 +31,9 @@ const champNameAndImg = (req, res, next) => {
         ChampionsModel
             .find({ 'tags': { "$all": tags } })
             .then(champions => {
-                console.log('estas en 1', champions)
                 const championImages = champions.map((champ) => `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_0.jpg`)
                 let nameAndImg = champions.map((champ, i) => {
-                    return { name: champ.id, 'img': championImages[i], tags: champ.tags }
+                    return { name: champ.id, 'img': championImages[i], tags: champ.tags, id: champ._id }
                 })
                 res.status(200).json(nameAndImg)
                 // res.render("index/champions", { nameAndImg });
@@ -44,7 +42,6 @@ const champNameAndImg = (req, res, next) => {
 };
 
 const searchChamps = (req, res, next) => {
-    console.log(req.query)
     let tags = []
 
     for (const key in req.query) {
@@ -52,7 +49,6 @@ const searchChamps = (req, res, next) => {
             tags.push(key)
         }
     }
-    console.log(tags)
 
     ChampionsModel
         .find({ 'tags': { "$all": [] } })
@@ -64,7 +60,7 @@ const searchChamps = (req, res, next) => {
 
 const randomChampAndItems = (req, res, next) => {
     let items = {}
-    console.log('random items', req.user)
+
     DDragonService
         .getItemKeys()
         .then(randomKeys => {
@@ -109,7 +105,6 @@ const championDetails = (req, res, next) => {
         // DDragonService
         //     .getDetailsChampions(championName)
         .then((championDetails) => {
-            console.log(championDetails)
 
             const image = `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${championName}_0.jpg`
             // let oneChampion = championDetails[championName]

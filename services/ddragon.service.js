@@ -15,7 +15,6 @@ class DDragonService {
             let keys = Object.keys(itemsObj)
             // mover a una función externa para mejor compresión de código :D
             keys = keys.filter((key) => key > 3000 && key != 3070 && key != 3330 && key != 7050)
-            console.log('filtrado', keys)
             return getSixItems(keys)
         })
     }

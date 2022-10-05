@@ -24,6 +24,7 @@ const userSchema = new Schema(
       type: String,
       unique: true,
     },
+    favChamp: [{ type: Schema.Types.ObjectId, ref: 'Champions' }]
   },
   {
     timestamps: true,

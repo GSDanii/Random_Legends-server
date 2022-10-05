@@ -8,7 +8,7 @@ const createUser = (req, res, next) => {
     UserModel.findOne({ username })
         .then((user) => {
             if (user) {
-                console.log('ME GUSTARÍA SABER SI ENTRO AQUÍ')
+
                 throw new Error('Name or password incorrect, please try again.');
             }
 
@@ -43,7 +43,6 @@ const login = (req, res, next) => {
 
 const getUser = (req, res, next) => {
     if (req.user) {
-        console.log(req.user)
         UserModel.findById(req.user._id).then((user) => {
             if (user) {
                 res.status(200).json(user)

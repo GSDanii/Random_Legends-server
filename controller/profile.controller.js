@@ -25,7 +25,7 @@ const userProfile = (req, res, next) => {
         })
         .then(infoElo => {
             info = infoElo
-            return UserModel.findById(userID)
+            return UserModel.findById(userID).populate('favChamp', 'id name title')
         })
         .then(foundUser => {
             let infoUser = { lvl, info, foundUser }
@@ -87,11 +87,29 @@ const userUpdate = (req, res, next) => {
         .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
 }
 
+const addFavChamp = (req, res, next) => {
+
+    const { champId, fav } = req.body
+    const { _id, favChamp } = req.user
+    const addOrPull = fav ? '$pull' : '$addToSet';
+
+
+    UserModel
+        .findByIdAndUpdate(_id, { [addOrPull]: { favChamp: champId } })
+        .then(() => {
+            console.log('llego aqui?')
+            res.sendStatus(200)
+        })
+        .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
+
+}
+
 module.exports = {
     getAllUsers,
     userProfile,
     userProfileUpdate,
     userUpdate,
     deleteUser,
-    userProfileUpdateAdmin
+    userProfileUpdateAdmin,
+    addFavChamp
 };

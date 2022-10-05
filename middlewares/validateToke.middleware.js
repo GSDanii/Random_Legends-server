@@ -5,9 +5,8 @@ const validateToken = (req, res, next) => {
     const { authorization } = req.headers;
     if (authorization) {
         const token = deleteBearer(authorization);
-        const { sub, username, role, summonerName } = verifyJwt(token)
-        req.user = { _id: sub, username, role, summonerName };
-        console.log('estoy en el middleWare', req.user)
+        const { sub, username, role, summonerName, favChamp } = verifyJwt(token)
+        req.user = { _id: sub, username, role, summonerName, favChamp };
     } else {
         res.sendStatus(401);
         return;
