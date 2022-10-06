@@ -37,6 +37,13 @@ class apiRiotService {
             })
             .catch(e => console.log(e))
     }
+    getSummonerName(puuid) {
+        return this.axios
+            .get(`/summoner/v4/summoners/by-puuid/${puuid}`)
+            .then(({ data }) => data)
+            .catch(e => console.log(e))
+    }
+
 }
 
 module.exports = new apiRiotService()
