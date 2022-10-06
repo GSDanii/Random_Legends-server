@@ -15,7 +15,6 @@ const champNameAndImg = (req, res, next) => {
     }
     tags.length === 0
         ?
-
         ChampionsModel
             .find()
             .then(champions => {
@@ -24,7 +23,6 @@ const champNameAndImg = (req, res, next) => {
                     return { name: champ.id, 'img': championImages[i], tags: champ.tags, id: champ._id }
                 })
                 res.status(200).json(nameAndImg)
-                // res.render("index/champions", { nameAndImg });
             })
             .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
         :
@@ -36,7 +34,7 @@ const champNameAndImg = (req, res, next) => {
                     return { name: champ.id, 'img': championImages[i], tags: champ.tags, id: champ._id }
                 })
                 res.status(200).json(nameAndImg)
-                // res.render("index/champions", { nameAndImg });
+
             })
             .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
 };
@@ -72,7 +70,7 @@ const randomChampAndItems = (req, res, next) => {
             const image = `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${randomChamp}_0.jpg`
             const itemsAndChamp = { items, randomChamp, image }
             res.status(200).json(itemsAndChamp)
-            // res.render('index/random', itemsAndChamp)
+
         })
         .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
 
@@ -93,38 +91,29 @@ const weeklyRotation = (req, res, next) => {
                 return { name, 'img': images[i] }
             })
             res.status(200).json(nameAndImg)
-            // res.render("index/rotation", { nameAndImg });
         })
         .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
-    // .catch((err) => next(err));
+
 };
 
 const championDetails = (req, res, next) => {
     const { championName } = req.params
     ChampionsModel.findOne({ id: `${championName}` })
-        // DDragonService
-        //     .getDetailsChampions(championName)
         .then((championDetails) => {
 
             const image = `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${championName}_0.jpg`
-            // let oneChampion = championDetails[championName]
-            const { id, key, name, title, lore, allytips, enemytips, passive, stats, skins, tags } = championDetails
 
-            // const stringStats = JSON.stringify(stats)
+            const { id, key, name, title, lore, allytips, enemytips, passive, stats, skins, tags } = championDetails
 
             let championData = { id, image, key, name, title, lore, allytips, enemytips, passive, stats, skins, tags }
             res.status(200).json(championData)
-            // res.render("index/champion-details", championData)
         })
         .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
-    // .catch((err) => next(err));
 }
 
 const championDetailsGraph = (req, res, next) => {
     const { championName } = req.params
     ChampionsModel.findOne({ id: `${championName}` })
-        // DDragonService
-        //     .getDetailsChampions(championName)
         .then((championDetails) => {
 
             const { id, key, name, title, lore, allytips, enemytips, passive, stats, skins, tags } = championDetails
@@ -160,10 +149,8 @@ const championDetailsGraph = (req, res, next) => {
                 ]
             }
             res.status(200).json(response)
-            // res.render("index/champion-details", championData)
         })
         .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
-    // .catch((err) => next(err));
 }
 
 const allChamps = (req, res, next) => {
