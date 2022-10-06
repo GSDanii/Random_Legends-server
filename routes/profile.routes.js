@@ -9,17 +9,25 @@ const { getAllUsers,
     userUpdate,
     deleteUser,
     userProfileUpdateAdmin,
-    addFavChamp
+    addFavChamp,
+    matches,
+    matchesQuery
 } = require('../controller/profile.controller');
 
 
 router.get('/users', validateToken, getAllUsers)
+
+router.get("/infoMatches", validateToken, matches)
+
+router.get("/rivals", validateToken, matchesQuery)
+
 
 router.get('/:id', validateToken, userProfile)
 
 router.get("/:id/update", validateToken, userProfileUpdate)
 
 router.get("/:id/adminUpdate", validateToken, userProfileUpdateAdmin)
+
 
 
 // TODO: unificar ambas rutas en una sola.

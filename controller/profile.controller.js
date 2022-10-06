@@ -1,5 +1,7 @@
 const UserModel = require('../models/User.model')
 const apiRiotService = require("../services/api-riot.service")
+const apiRiotEurope = require("../services/api-riot-Europe.service.js")
+const filterMatches = require("../utils/filterMatches.util")
 
 
 const getAllUsers = (req, res, next) => {
@@ -97,12 +99,67 @@ const addFavChamp = (req, res, next) => {
     UserModel
         .findByIdAndUpdate(_id, { [addOrPull]: { favChamp: champId } })
         .then(() => {
-            console.log('llego aqui?')
+
             res.sendStatus(200)
         })
         .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
 
 }
+
+const matches = (req, res, next) => {
+    const { summonerName } = req.user
+    apiRiotService
+        .getSummonerInfo(summonerName)
+        .then(userInfo => {
+            const { puuid } = userInfo
+            return apiRiotEurope.getLastMatches(puuid)
+        })
+        .then((lastMatches) => Promise.all(lastMatches.map(match => {
+            return apiRiotEurope.getInfoMatch(match)
+        })))
+        .then((matchInfo) => {
+            let infoMatches = filterMatches(matchInfo)
+            res.status(200).json(infoMatches)
+        })
+        // .then((matchInfo) => {
+        //     let infoMatches = filterMatches(matchInfo)
+        //     infoMatches.map(match => {
+        //         return Promise.all(match.players.map(playerPuuid => {
+        //             return apiRiotService.getSummonerName(playerPuuid)
+        //         }))
+        //     })
+        // })
+        // .then(summonerNames => res.status(200).json(user))
+        .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
+}
+
+const matchesQuery = (req, res, next) => {
+    const { summonerName } = req.query
+    apiRiotService
+        .getSummonerInfo(summonerName)
+        .then(userInfo => {
+            const { puuid } = userInfo
+            return apiRiotEurope.getLastMatches(puuid)
+        })
+        .then((lastMatches) => Promise.all(lastMatches.map(match => {
+            return apiRiotEurope.getInfoMatch(match)
+        })))
+        .then((matchInfo) => {
+            let infoMatches = filterMatches(matchInfo)
+            res.status(200).json(infoMatches)
+        })
+        // .then((matchInfo) => {
+        //     let infoMatches = filterMatches(matchInfo)
+        //     infoMatches.map(match => {
+        //         return Promise.all(match.players.map(playerPuuid => {
+        //             return apiRiotService.getSummonerName(`${playerPuuid}`)
+        //         }))
+        //     })
+        // })
+        // .then(summonerNames => res.status(200).json(user))
+        .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
+}
+
 
 module.exports = {
     getAllUsers,
@@ -111,5 +168,7 @@ module.exports = {
     userUpdate,
     deleteUser,
     userProfileUpdateAdmin,
-    addFavChamp
+    addFavChamp,
+    matches,
+    matchesQuery
 };
