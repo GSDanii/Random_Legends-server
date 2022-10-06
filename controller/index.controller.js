@@ -120,6 +120,52 @@ const championDetails = (req, res, next) => {
     // .catch((err) => next(err));
 }
 
+const championDetailsGraph = (req, res, next) => {
+    const { championName } = req.params
+    ChampionsModel.findOne({ id: `${championName}` })
+        // DDragonService
+        //     .getDetailsChampions(championName)
+        .then((championDetails) => {
+
+            const { id, key, name, title, lore, allytips, enemytips, passive, stats, skins, tags } = championDetails
+
+            let response = {
+                smallData: [
+                    {
+                        label: 'ATTACK',
+                        [id]: stats.attackdamage
+                    },
+                    {
+                        label: 'ARMOR',
+                        [id]: stats.armor
+                    },
+                    {
+                        label: 'MAGIC RESISTANCE',
+                        [id]: stats.spellblock
+                    }
+                ],
+                bigData: [
+                    {
+                        label: 'LIFE',
+                        [id]: stats.hp
+                    },
+                    {
+                        label: 'MANA',
+                        [id]: stats.mp
+                    },
+                    {
+                        label: 'MOVE SPEED',
+                        [id]: stats.movespeed
+                    }
+                ]
+            }
+            res.status(200).json(response)
+            // res.render("index/champion-details", championData)
+        })
+        .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
+    // .catch((err) => next(err));
+}
+
 const allChamps = (req, res, next) => {
     ChampionsModel.find()
         .then(allChamps => res.status(200).json(allChamps))
@@ -132,5 +178,6 @@ module.exports = {
     randomChampAndItems,
     weeklyRotation,
     championDetails,
+    championDetailsGraph,
     allChamps
 };

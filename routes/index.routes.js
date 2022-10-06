@@ -6,6 +6,7 @@ const { champNameAndImg,
   randomChampAndItems,
   weeklyRotation,
   championDetails,
+  championDetailsGraph,
   allChamps
 } = require('../controller/index.controller');
 const validateToken = require('../middlewares/validateToke.middleware');
@@ -21,6 +22,8 @@ router.get("/randomPick", validateToken, randomChampAndItems)
 router.get("/weeklyRotation", weeklyRotation);
 
 router.get("/champion-details/:championName", championDetails)
+
+router.get("/champion-details-graph/:championName", championDetailsGraph)
 
 router.get("/checkBox", validateToken, allChamps)
 
