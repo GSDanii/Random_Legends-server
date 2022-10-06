@@ -125,7 +125,7 @@ const matches = (req, res, next) => {
         //     let infoMatches = filterMatches(matchInfo)
         //     infoMatches.map(match => {
         //         return Promise.all(match.players.map(playerPuuid => {
-        //             return apiRiotService.getSummonerName(`${playerPuuid}`)
+        //             return apiRiotService.getSummonerName(playerPuuid)
         //         }))
         //     })
         // })

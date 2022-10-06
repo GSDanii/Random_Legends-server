@@ -1,6 +1,6 @@
 const filterMatches = (matches) => {
 
-    let infoMatch = matches.map(match => {
+    const infoMatch = matches.map(match => {
         let totalAssists100 = 0
         let totalAssists200 = 0
         let totalDeaths100 = 0
@@ -22,14 +22,14 @@ const filterMatches = (matches) => {
                 : totalDeaths200 += deaths
 
             return {
-                summonerName: summonerName,
-                championName: championName,
+                summonerName,
+                championName,
                 kda: kda.toFixed(2),
-                kills: kills,
-                assists: assists,
-                deaths: deaths,
-                totalDamageDealtToChampions: totalDamageDealtToChampions,
-                totalDamageTaken: totalDamageTaken
+                kills,
+                assists,
+                deaths,
+                totalDamageDealtToChampions,
+                totalDamageTaken
             }
         })
         const teamsData = teams.map(team => {
@@ -50,11 +50,11 @@ const filterMatches = (matches) => {
                 : teamDeadths = totalDeaths200
 
             return {
-                teamId: teamId,
-                win: win,
+                teamId,
+                win,
                 teamKills: kills,
-                teamDeadths: teamDeadths,
-                teamAssists: teamAssists,
+                teamDeadths,
+                teamAssists,
                 inhibitor: nInhibitors,
                 tower: nTowers
             }
