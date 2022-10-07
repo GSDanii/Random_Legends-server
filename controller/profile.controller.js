@@ -130,7 +130,10 @@ const matches = (req, res, next) => {
         //     })
         // })
         // .then(summonerNames => res.status(200).json(user))
-        .catch((err) => res.status(400).json({ messageError: 'Ha ocurrido un error' }))
+        .catch((err) => {
+            console.log(err);
+            res.status(400).json({ messageError: 'Ha ocurrido un error' })
+        })
 }
 
 const matchesQuery = (req, res, next) => {

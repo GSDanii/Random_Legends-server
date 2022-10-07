@@ -9,7 +9,7 @@ const filterMatches = (matches) => {
         const { info } = match
         const { gameMode, participants, teams } = info
 
-        const playersData = participants.map(player => {
+        const playersData = participants.reduce((acc, player) => {
             const { assists, challenges, championName, deaths, kills, totalDamageDealtToChampions, totalDamageTaken, summonerName } = player
             const { kda } = challenges
 
@@ -21,7 +21,7 @@ const filterMatches = (matches) => {
                 ? totalDeaths100 += deaths
                 : totalDeaths200 += deaths
 
-            return {
+            acc[player.teamId].push({
                 summonerName,
                 championName,
                 kda: kda.toFixed(2),
@@ -30,8 +30,10 @@ const filterMatches = (matches) => {
                 deaths,
                 totalDamageDealtToChampions,
                 totalDamageTaken
-            }
-        })
+            });
+            return acc;
+        }, { 100: [], 200: [] });
+        console.log(playersData);
         const teamsData = teams.map(team => {
             const { objectives, teamId, win } = team
             const { champion: asesinatos, inhibitor, tower } = objectives
@@ -50,6 +52,7 @@ const filterMatches = (matches) => {
                 : teamDeadths = totalDeaths200
 
             return {
+                playersData: playersData[teamId],
                 teamId,
                 win,
                 teamKills: kills,
@@ -60,7 +63,7 @@ const filterMatches = (matches) => {
             }
         })
 
-        return { gameMode, teamsData, playersData }
+        return { gameMode, teamsData }
     })
     return infoMatch
 }
