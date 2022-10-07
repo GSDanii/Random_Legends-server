@@ -14,7 +14,7 @@ class apiRiotEurope {
     getLastMatches(puuid) {
         console.log(puuid)
         return this.axios
-            .get(`/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=2`)
+            .get(`/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=10`)
             .then(({ data }) => data)
             .catch(e => console.log(e))
     }
